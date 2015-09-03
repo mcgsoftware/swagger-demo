@@ -1,0 +1,92 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.0.1",
+        "title": "Helpies API",
+        "description": "This is my api. It is for a demo. \n\n# Service Agreements\n\n\n## Latency\nThe following latency is expected by this API.\n\nTP    | Value\n------|----------\n tp99 | 1 second  \n tp90 | 3 seconds\n tp50 | 0.5 seconds\n\n\n## Errors\nWe expect foo is bar.\n\n## Purpose\nThis is my purpose.\n"
+    },
+    "paths": {
+        "/helpies": {
+            "get": {
+                "description": "Gets `Helpie` objects.\nOptional query param of **limit** determines\nsize of returned array\n\n#### TODO\n- This is not good design. Fix me.\n- Refactor params for sorting.\n",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Size of results",
+                        "required": false,
+                        "type": "number",
+                        "format": "double"
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "Number of rows to offset results from",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "properties": {
+                                "meta": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "number"
+                                        }
+                                    }
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Person"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Person": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "username": {
+                    "type": "string"
+                },
+                "full_name": {
+                    "type": "string"
+                },
+                "profile_picture": {
+                    "type": "string"
+                },
+                "bio": {
+                    "type": "string"
+                },
+                "website": {
+                    "type": "string"
+                },
+                "counts": {
+                    "type": "object",
+                    "properties": {
+                        "media": {
+                            "type": "integer"
+                        },
+                        "follows": {
+                            "type": "integer"
+                        },
+                        "follwed_by": {
+                            "type": "integer"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
